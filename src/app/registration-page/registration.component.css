@@ -1,0 +1,9 @@
+.field{
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+}
+
+.field p{
+    width: 100px;
+}

@@ -1,0 +1,31 @@
+<div>
+        <a
+        routerLink="/main"
+        routerLinkActive="active"
+        >Back</a>
+
+
+<div class="main__wrapper history">
+                <div id="message__wrapper-all">
+                 
+                    <div
+                 class="message__wrapper"
+                 id="message__wrapper"
+                 >
+                    <div
+                    class="message"
+                    *ngFor="let i of messages"
+                    >
+                    <p>
+                        <span
+                        [ngClass]="userId == i.userId ? 'current' : ''"
+                        >{{i.userName}}</span>
+                         at</p>
+                    <p>{{i._creationDate | date:"HH:mm:ss"}}:</p>
+                <p>{{i.text}}</p>
+                </div>
+                </div>
+               
+                </div>
+            </div>
+</div>

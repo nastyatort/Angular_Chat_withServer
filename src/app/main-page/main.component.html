@@ -1,0 +1,55 @@
+<div>
+    <div class="header__wrapper">
+    <div class="name">Username: <span>{{userName}}</span></div>
+    <div class="history">
+        <a
+        routerLink="/history"
+        routerLinkActive="active"
+        >History</a>
+    </div>
+    </div>
+<div id="main__wrapper" class="main__wrapper">
+    <div id="message__wrapper-all">
+     
+        <div
+     class="message__wrapper"
+     id="message__wrapper"
+     >
+        <div
+        class="message"
+        *ngFor="let i of messages"
+        >
+        <p>
+            <span
+            [ngClass]="userId == i.userId ? 'current' : ''"
+            >{{i.userName}}</span>
+             at</p>
+        <p>{{i._creationDate | date:"HH:mm:ss"}}:</p>
+    <p>{{i.text}}</p>
+    </div>
+    </div>
+   
+    </div>
+</div>
+
+<div class="input__wrapper">
+
+    <input
+    name="text"
+    id="text"
+    [(ngModel)]="message.text" #messageText="ngModel" 
+    >
+    <button
+    (click)="onShowSmile()"
+    >:-)</button>
+    
+    <button
+    (click)="onSend()"
+    >send</button>
+
+    <div *ngIf="showSmile==true">
+        <smile-page></smile-page>
+    </div>
+
+</div>
+</div>

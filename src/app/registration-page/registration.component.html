@@ -1,0 +1,42 @@
+<div class="content__wrapper">
+    <a routerLink="/login">Back to login</a>
+
+    <form  
+    [formGroup]="registerForm"
+    novalidate
+    class="register__form"
+    >
+        <div class="field">
+            <p>Login</p>
+            <input
+            name="login"
+            formControlName="login"
+            placeholder="login" />
+        </div>
+
+        <div class="field">
+            <p>Pass</p>
+            <input
+            type="password"
+            name="pass"
+            formControlName="pass"
+            placeholder="password" />
+        </div>
+
+        <div class="field">
+            <p>Repeat pass</p>
+            <input
+            type="password"
+            name="passRepeat"
+            formControlName="passRepeat"
+            placeholder="repeatpassword" 
+            >
+        </div>
+
+        <p>{{message}}</p>
+
+        <button
+        (click)="onSend()"
+        >Registration</button>
+    </form>
+</div>

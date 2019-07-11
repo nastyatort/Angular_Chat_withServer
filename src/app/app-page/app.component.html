@@ -1,0 +1,13 @@
+<div class="app__wrapper">
+        <a
+        *ngIf="showLogoutUi == true"
+        class="logout"
+        (click)="logout()"
+        routerLink="/login"
+        routerLinkActive="active"
+        >
+        logout
+</a>
+
+    <router-outlet></router-outlet>
+</div>

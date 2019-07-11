@@ -1,0 +1,5 @@
+.app__wrapper{
+    border: 1px solid black;
+    padding: 10px;
+    min-height: 500px
+}

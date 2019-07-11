@@ -1,0 +1,49 @@
+<div class="content__wrapper">
+        <div class="header">
+            <h3>login</h3>
+        </div>
+        <div class="content">
+
+        
+            <form 
+            #loginForm="ngForm"
+            novalidate
+            class="login__form"
+            >
+
+            <div class="login__field">
+                <label>Login</label>
+                <input
+                name="login"
+                [(ngModel)]="user.login"
+                #userLogin="ngModel"
+                placeholder="login" />
+            </div>
+            <div class="login__field">
+                <label>Password</label>
+                <input 
+                type="password"
+                name="pass"
+                [(ngModel)]="user.pass"
+                #userPass="ngModel"
+                placeholder="password" />
+            </div>
+
+            <div class="login__field">
+                <button
+                (click)="onLogin(userLogin, userPass)"
+                >Login
+            </button>
+            </div>
+
+            <div class="login__field">
+                <a routerLink="/registration">Registration</a>
+            </div>
+
+            <div class="login__err">
+                {{errMessage}}
+            </div>
+
+            </form>
+        </div>
+    </div>
