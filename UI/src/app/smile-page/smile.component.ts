@@ -2,7 +2,7 @@ import { Component} from '@angular/core';
 import { NgModel} from '@angular/forms';
 import {UserComponent} from '../user-page/user.component';
 import {SmileService} from '../services/smile.service'
-import {MainComponent} from '../main-page/main.component'
+import {MainComponent} from '../main-page/main.component';
 
   
 @Component({
@@ -15,13 +15,14 @@ export class SmileComponent{
 
     constructor(
         private smileService: SmileService,
-        private mainComponent: MainComponent
+        private mainComponent: MainComponent,
     ){}
 
     smiles:any = [];
     choosenSmile: string;
 
     ngOnInit(){
+
         this.smileService.getData({}).subscribe(
             (data: any) => {
                 for(let i = 0; i < data.items.length; i++){
@@ -29,7 +30,6 @@ export class SmileComponent{
                 }
             }
         )
-        console.log(this.smiles)
     }
 
     chooseSmile(i:string){

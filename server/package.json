@@ -1,0 +1,24 @@
+{
+    "name": "modulesapp",
+    "version": "1.0.0",
+    "devDependencies": {
+        "jasmine-node": "^3.0.0"
+    },
+    "scripts": {
+        "start": "node app.js",
+        "watch": "nodemon app.js"
+    },
+    "dependencies": {
+        "bcrypt": "^3.0.6",
+        "body-parser": "^1.19.0",
+        "connect-mongodb": "^1.1.5",
+        "connect-mongodb-session": "^2.2.0",
+        "cookie-parser": "^1.4.4",
+        "cors": "^2.8.5",
+        "express": "^4.17.1",
+        "express-session": "^1.16.2",
+        "mongodb": "^3.1.0",
+        "node-static": "^0.7.11",
+        "ws": "^7.1.0"
+    }
+}

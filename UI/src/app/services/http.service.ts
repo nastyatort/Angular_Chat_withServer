@@ -7,10 +7,10 @@ export class HttpService{
     constructor(private http: HttpClient){ } 
 
     getData(data: any){
-      return this.http.post('http://localhost:8008/api/message/get', data); 
+      return this.http.post('http://localhost:8008/message/get', data); 
     }
 
     addData(data: any){
-      return this.http.post('http://localhost:8008/api/message/create', data); 
+      return this.http.post('http://localhost:8008/message/create', data); 
     }
 }

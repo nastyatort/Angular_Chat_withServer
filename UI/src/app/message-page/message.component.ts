@@ -14,8 +14,9 @@ export class MessageComponent{
     public creationDate: any;
     constructor(
         public text: string,
-        public userId: any
+        public userId: any,
         )
-    { }
+    {}
+
 }
 

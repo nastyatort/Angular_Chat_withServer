@@ -9,6 +9,6 @@ export class LoginService{
     private data: boolean = false;
 
     sendData(data: any){
-        return this.http.post('http://localhost:8008/api/login', data); 
+        return this.http.post('http://localhost:8008/login', data); 
       }
 }

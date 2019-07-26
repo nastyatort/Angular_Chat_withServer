@@ -8,7 +8,7 @@ export class SmileService{
     smile: string;
 
     getData(data: any){
-      return this.http.post('http://localhost:8008/api/smile/get', data); 
+      return this.http.post('http://localhost:8008/smile/get', data); 
     }
 
     setSmile(data:string){

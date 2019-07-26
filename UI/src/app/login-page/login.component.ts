@@ -48,6 +48,7 @@ export class LoginComponent implements OnInit {
         this.loginService.sendData(
         {login: this.user.login, pass: this.user.pass}
         ).subscribe((res: any) => {
+            console.log(res)
             if(res.success == true){
                 this.router.navigate([this.returnUrl]);
 
@@ -59,13 +60,12 @@ export class LoginComponent implements OnInit {
 
                 this.storageData = {
                     loginUserId: res.user._id,
-                    loginUserName: res.user.login
+                    loginUserName: res.user.name
                 }
                 localStorage.setItem("userData", JSON.stringify(this.storageData));
 
-
             }else{
-                this.errMessage = res.message;
+                this.errMessage = "Не верно указан логин или пароль"
             }
         })
     }else{

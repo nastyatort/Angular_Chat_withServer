@@ -9,6 +9,6 @@ export class RegistrationService{
     private data: boolean = false;
 
     sendData(data: any){
-        return this.http.post('http://localhost:8008/api/register', data); 
+        return this.http.post('http://localhost:8008/registration', data); 
       }
 }
