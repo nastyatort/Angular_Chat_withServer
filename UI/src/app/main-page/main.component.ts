@@ -1,106 +1,114 @@
 import { Component } from '@angular/core';
+import { NgModel } from '@angular/forms';
 import { HttpService } from '../services/http.service';
 import { UserService } from '../services/user.service';
-import { SmileService } from '../services/smile.service';
-import { MessageComponent } from '../message-page/message.component';
-import { UserComponent } from '../user-page/user.component';
-import { PassThrough } from 'stream';
-// import {SmileComponent} from '../smile-page/smile.component';
-//import { SocketService } from '../services/socket.services'
+// import * as angular from 'angular'; 
+
+import { ModalComponent } from '../modal-page/modal.component';
+
+import { PhoneComponent } from '../phone-page/phone.component';
+import { identifierModuleUrl } from '@angular/compiler';
 
 @Component({
     selector: 'main-page',
     styleUrls: ['./main.component.css', '../style.css'],
     templateUrl: './main.component.html',
+    providers: [HttpService]
 })
 
 export class MainComponent {
-    date: any;
+
     constructor(
         private httpService: HttpService,
         private userService: UserService,
-        private smileService: SmileService,
-        
-        //private socketService: SocketService
-    ) { 
-    }
+    ) { }
 
-    message: MessageComponent = new MessageComponent("", "");
-    messages: MessageComponent[] = [];
-    messagesAll: MessageComponent[] = [];
-    messagesSocket: MessageComponent[] = [];
-    user: UserComponent;
-    userName: any = this.userService.getUserName();
+    phone: PhoneComponent = new PhoneComponent("");
+    phones: PhoneComponent[] = [];
     userId: any = this.userService.getUserId();
-    showSmile: boolean = false;
-    text: string;
-    socket = new WebSocket("ws://localhost:3000");
-    ob: any;
+    phoneId: string;
+    shouldDeletePhone: boolean = false;
+
+    idForModal: string;
+    idForAction: string;
+
+    currentValue: string;
 
     ngOnInit() {
         this.httpService.getData({}).subscribe(
             (data: any) => {
-                this.drewMessages(data)
+                for (let i = 0; i < data.items.length; i++) {
+                        this.phones.push(data.items[i]);
+                }
             });
     }
 
-    onChangeText(smile: string) {
-        let withoutChanges = (document.getElementById("text") as HTMLInputElement).value;
-        let withChanges = withoutChanges.concat(smile)
-        this.message.text = withChanges
+    addPhone(title: NgModel) {
+        if (title.model != '') {
+            this.httpService.addData(
+                {
+                    title: this.phone.title,
+                    userId: this.userId
+                })
+                .subscribe((res: any) => {
+                    this.httpService.getData({}).subscribe(
+                        (data: any) => {
+                            this.phones = [];
+                            for (let i = 0; i < data.items.length; i++) {
+                                if (data.items[i].userId == this.userId) {
+                                    this.phones.push(data.items[i]);
+                                }
+                            }
+                        });
+                });
+        }
+        console.log( this.idForAction)
+        this.idForAction = '';
     }
 
-    onSend() {
-        this.socket.send(JSON.stringify({
-            text: this.message.text,
-            userName: this.userName,
-            userId: this.userId,
-            _creationDate: new Date()
-        }
-        ));
+    editPhone(id: string) {
+        ((document.getElementById(id) as HTMLInputElement).disabled) = false;
+        this.currentValue = (document.getElementById(id) as HTMLInputElement).value;
+        this.idForAction = id;
+    }
 
-        this.socket.onmessage = (event) => {
-            this.ob = JSON.parse(event.data);
-            this.messages.push(this.ob);
-          };
+    savePhone(id: string) {
+        let newText = ((document.getElementById(id) as HTMLInputElement).value);
 
-        setTimeout(() => {
-            this.scroll();
-        }, 0.1);
-
-        this.httpService.addData({
-            text: this.message.text,
-            userName: this.userName,
+        this.httpService.editData({
+            title: newText,
+            _id: id,
             userId: this.userId
-        }).subscribe(
-            (data: any) => {
-                // this.messages.push(data.newItem);
-            }
-        )
-        this.message.text = "";
+        }).subscribe(res => {
+            let editElement = this.phones.findIndex(x => x._id === id);
+            this.phones.splice(editElement, 1, { title: newText, _id: id, userId: this.userId })
+        })
+        this.idForAction = '';
+        this.idForModal = '';
+
+        ((document.getElementById(id) as HTMLInputElement).disabled) = true;
     }
 
-    scroll() {
-        let h = document.getElementById("message__wrapper-all").offsetHeight;
-        document.getElementById("main__wrapper").scrollTo(0, h);
+    cancelPhone(id: string) {
+        ((document.getElementById(id) as HTMLInputElement).disabled) = true;
+        (document.getElementById(id) as HTMLInputElement).value = this.currentValue;
+        this.idForAction = '';
     }
 
-    drewMessages(data: any) {
-        for (let i = 0; i < data.items.length; i++) {
-            data.items = this.sortData(data.items);
-            this.messagesAll.push(data.items[i]);
-            this.messages = this.messagesAll.slice(0, 20);
-            this.messages = this.messages.reverse();
+    deletePhone(id: string) {
+        console.log('ui id = ' + id);
+        if (this.shouldDeletePhone == true) {
+            this.httpService.deleteData(id).subscribe(res => {})
+                let delElement = this.phones.findIndex(x => x._id == id);
+                this.phones.splice(delElement, 1);
         }
     }
 
-    sortData(data: any) {
-        return data.sort((a: any, b: any) => {
-            return <any>new Date(b._creationDate) - <any>new Date(a._creationDate);
-        });
-    }
-
-    onShowSmile() {
-        this.showSmile = !this.showSmile;
+    showModal(id: string) {
+        this.idForModal = id;
+        this.phoneId = id;
+        if ((document.getElementById(id + '__modal') as HTMLDialogElement)) {
+            (document.getElementById(id + '__modal') as HTMLDialogElement).style.visibility = "visible"
+        }
     }
 }

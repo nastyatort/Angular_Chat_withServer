@@ -1,5 +1,6 @@
 .content__wrapper{
     min-height: 400px;
+    border: 1px solid;
     margin: 10px
 }
 
@@ -86,45 +87,15 @@ a.active{
     color: white !important;
 }
 
-a{
-    cursor: pointer;
+.app__header{
+    margin: 0 10px
 }
 
-.app__wrapper{
-    max-height: 528px;
+.link__wrapper{
+    margin: 0 10px;
 }
 
-.app__wrapper{
-    position: relative
-}
-
-
-.main__wrapper{
-    height: 400px;
-    overflow-y: auto;
-}
-
-.message{
-    display: flex;
-    align-self: flex-start;
-    justify-content: flex-start;
-}
-
-.message p{
-    margin-right: 5px;
-}
-
-.message p:first-child span{
-    color: green;
-    font-weight: bold;
-}
-
-.message p:first-child span.current{
-    color: brown; 
-    text-decoration: underline
-}
-
-.message p:nth-child(2){
-    color: blue;
-    font-weight: bold;
+.nav__field .link__wrapper{
+    margin: 0 0;
+    padding: 5px 10px
 }

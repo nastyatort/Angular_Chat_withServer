@@ -1,55 +1,61 @@
-<div>
-    <div class="header__wrapper">
-    <div class="name">Username: <span>{{userName}}</span></div>
-    <div class="history">
-        <a
-        routerLink="/history"
-        routerLinkActive="active"
-        >History</a>
-    </div>
-    </div>
-<div id="main__wrapper" class="main__wrapper">
-    <div id="message__wrapper-all">
-     
-        <div
-     class="message__wrapper"
-     id="message__wrapper"
-     >
-        <div
-        class="message"
-        *ngFor="let i of messages"
-        >
-        <p>
-            <span
-            [ngClass]="userId == i.userId ? 'current' : ''"
-            >{{i.userName}}</span>
-             at</p>
-        <p>{{i._creationDate | date:"HH:mm:ss"}}:</p>
-    <p>{{i.text}}</p>
-    </div>
-    </div>
-   
-    </div>
-</div>
+<div class="content__wrapper">
 
-<div class="input__wrapper">
+    <div class="header">
+        <h3>main</h3>
+    </div>
 
-    <input
-    name="text"
-    id="text"
-    [(ngModel)]="message.text" #messageText="ngModel" 
-    >
-    <button
-    (click)="onShowSmile()"
-    >:-)</button>
     
-    <button
-    (click)="onSend()"
-    >send</button>
+    <div class="content">
 
-    <div *ngIf="showSmile==true">
-        <smile-page></smile-page>
+            <form #myForm="ngForm" novalidate>
+            <input name="title"
+            [(ngModel)]="phone.title" #phoneTitle="ngModel" />
+                  
+            <button (click)="addPhone(phoneTitle)">Add</button>
+
+            <div
+            *ngFor="let i of phones"
+            class="list__wrapper"
+            >
+
+            <input 
+            disabled
+            name="text"
+            id="{{i._id}}"
+            value="{{i.title}}"
+            />
+
+            <div class="button__wrapper">
+
+            <button 
+            *ngIf="idForAction != i._id"
+            (click)="editPhone(i._id)"
+            >edit</button>
+
+            <button
+            *ngIf="idForAction == i._id"
+            (click)="savePhone(i._id)"
+            >Save</button>
+
+            <button
+            *ngIf="idForAction == i._id"
+            (click)="cancelPhone(i._id)"
+            >Cancel</button>
+
+            <button
+            (click)="showModal(i._id)"
+            >Delete</button>
+
+            <modal-page
+            *ngIf="idForModal == i._id"
+            id="{{i._id}}"
+            [id]="i._id"
+            ></modal-page>
+        
+            </div>
+            </div>
+
+            </form>
+            
     </div>
-
-</div>
 </div>

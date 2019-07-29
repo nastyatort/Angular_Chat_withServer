@@ -1,41 +1,21 @@
-
-.message__wrapper{
-    margin-top: 10px;
+.list__wrapper{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border: 1px solid gray;
+    margin-top: 2px
 }
 
-.input__wrapper{
-    height: 60px;
-    margin-top: 20px
+.list__wrapper input{
+    width: 50%
 }
 
-input{
-    width: 83%
+p{
+    margin-bottom: 0
 }
 
-.name{
-    margin-top: 10px
+.update{
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
 }
-
-.name span{
-    color: brown;
-    font-weight: bold
-}
-
-.example-viewport {
-    height: 360px;
-    width: 100%
-  }
-  
-  .example-item {
-    height: 50px;
-  }
-
-  .main__wrapper{
-      border: 1px solid black
-  }
-
-  .header__wrapper{
-      display: flex;
-      align-items: center;
-      justify-content: space-between
-  }

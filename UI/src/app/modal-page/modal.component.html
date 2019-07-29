@@ -1,0 +1,21 @@
+<div
+id="{{id}}__modal"
+class="modal__wrapper"
+>
+    <p>{{id}}</p>
+
+    <div
+    class="close__modal"
+    (click)="closeModal()"
+    >x</div>
+
+    <p>Delete phone?</p>
+    <div class="choose">
+        <div
+        (click)="deletePhone()"
+        >Yes</div>
+        <div
+        (click)="closeModal()"
+        >No</div>
+    </div>
+</div>

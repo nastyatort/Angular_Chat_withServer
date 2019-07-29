@@ -10,11 +10,11 @@ export class AppComponent {
     constructor(){}
     isLogoutData: any;
     showLogout: any;
-    showLogoutUi: boolean = true;
+    showLogoutUi: boolean = false;
 
     ngOnInit(){ 
         this.showLogout =  JSON.parse(localStorage.getItem("isLogged"));
-        this.showLogoutUi = (this.showLogout.trigger)
+        this.showLogoutUi = (this.showLogout.trigger);
     }
 
     logout(){
@@ -25,5 +25,6 @@ export class AppComponent {
 
         this.showLogout = JSON.parse(localStorage.getItem("isLogged"));
         this.showLogoutUi = (this.showLogout.trigger);
+        console.log(this.showLogoutUi)
     }
 }

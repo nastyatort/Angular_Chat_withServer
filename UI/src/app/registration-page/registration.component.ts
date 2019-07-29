@@ -1,6 +1,6 @@
-import { Component } from '@angular/core';
-import { RegistrationService } from "../services/registration.service";
-import { UserComponent } from '../user-page/user.component';
+import { Component} from '@angular/core';
+import { RegistrationService} from "../services/registration.service";
+import {UserComponent} from '../user-page/user.component';
 import { FormControl, FormGroup, Validators } from "@angular/forms";
 import { IfStmt } from '@angular/compiler';
 import { THIS_EXPR } from '@angular/compiler/src/output/output_ast';
@@ -13,11 +13,11 @@ import { AppComponent } from '../app-page/app.component'
     templateUrl: './registration.component.html'
 })
 
-export class RegistrationComponent {
+export class RegistrationComponent{
     constructor(
-        private registrationService: RegistrationService,
+        private registrationService:  RegistrationService,
         private appComponent: AppComponent
-    ) { }
+    ){}
 
     // user: UserComponent = new UserComponent("", "");
 
@@ -27,13 +27,13 @@ export class RegistrationComponent {
     message: string;
     isLoggedData: any;
 
-    registerForm: FormGroup = new FormGroup({
+    registerForm : FormGroup = new FormGroup({
         "login": new FormControl("", [Validators.required]),
         "pass": new FormControl("", [Validators.required]),
         "passRepeat": new FormControl("", [Validators.required])
     });
 
-    ngAfterViewInit() {
+    ngAfterViewInit(){
         this.isLoggedData = {
             trigger: false,
         }
@@ -41,24 +41,22 @@ export class RegistrationComponent {
         localStorage.setItem("isLogged", JSON.stringify(this.isLoggedData));
     }
 
-    onSend() {
+    onSend(){
         this.login = this.registerForm.controls.login.value;
         this.pass = this.registerForm.controls.pass.value;
         this.passRepeat = this.registerForm.controls.passRepeat.value;
-        if (this.pass == this.passRepeat) {
+        if(this.pass == this.passRepeat && this.pass != '' && this.login != ''){
             this.registrationService.sendData({
                 login: this.login,
                 pass: this.pass
             }).subscribe((res: any) => {
-                console.log(res);
-                if (res.success == true) {
+                if(res.success == true){
                     this.message = "Вы зарегистрированы, вернитесь на логин"
-                } else {
+                }else{
                     this.message = "Такой юзер уже существует"
                 }
-            }
-            )
-        } else {
+             })
+        }else{
             this.message = "Введите корректные данные"
         }
     }

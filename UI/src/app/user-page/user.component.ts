@@ -10,6 +10,7 @@ import { LoginService} from '../services/login.service';
 
 export class UserComponent{
     public _id: any;
+    private loginService: LoginService;
     constructor(
         public login: string,
         public pass: string

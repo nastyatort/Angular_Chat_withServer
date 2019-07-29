@@ -1,0 +1,17 @@
+.content__item{
+    display: flex;
+    align-items: center;
+    justify-content: flex-start
+}
+
+p:first-child{
+    width: 100px
+}
+
+label{
+    width: 100px
+}
+
+h5{
+    color: red
+}

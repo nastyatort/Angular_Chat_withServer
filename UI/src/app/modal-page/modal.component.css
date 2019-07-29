@@ -1,0 +1,53 @@
+.modal__wrapper{
+    width: 200px;
+    height: 200px;
+    border: 1px solid black;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    position: absolute;
+    left: 150px;
+    top: 150px;
+    box-shadow:  0px 0px 53px 0px rgba(0,0,0,0.75);
+    background: white;
+}
+
+.close__modal{
+    background: brown;
+    opacity: 1;
+    position: absolute;
+    right: 0;
+    top: 0;
+    width: 30px;
+    height: 30px;
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer
+}
+
+.choose{
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+}
+
+.choose div{
+    width: 40px;
+    height: 20px;
+    border: 1px solid black;
+    color: white;
+    text-align: center;
+    cursor: pointer
+}
+
+.choose div:first-child{
+    background: green;
+    margin-right: 30px;
+}
+
+.choose div:last-child{
+    background: brown
+}
