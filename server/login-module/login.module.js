@@ -1,3 +1,5 @@
+let sequel = require('../db-module/db.module')
+
 module.exports = {
     login: function (request, response) {
 
@@ -13,27 +15,46 @@ module.exports = {
         let userLog = { name: userName, password: userPass };
         //взяли из базы чтоб все сравнить
 
-        connection.query("SELECT * FROM users WHERE name = '" + userLog.name + "'",
-            function (err, results, fields) {
-                if (results[0] != undefined && bcrypt.compareSync(userLog.password, results[0].password) == true) {
-                        currentUserId = results[0]._id;
-                        currentUserName = results[0].name;
-                        response.send({
-                            "success": true,
-                            "user": {
-                                "name": results[0].name,
-                                "_id": results[0]._id,
-                                "firstName": results[0].firstName,
-                                "lastName": results[0].lastName,
-                                "email": results[0].email,
-                                "phone": results[0].phone
-                            }
-                        }) 
-                } else {
-                    response.send({
-                        "success": false
-                    })
+
+
+        sequel.users.findOne({where: {name: userName, password: userPass}})
+        .then(users=>{
+            if(!users) return;
+            
+            response.send({
+                "success": true,
+                "user": {
+                    "name": users.name,
+                    "_id":  users._id
                 }
+            })
+
+          }).catch(err => {
+              console.log(err)
+              response.send({
+                "success": false
+            })
             });
+
+
+
+        // connection.query("SELECT * FROM users WHERE name = '" + userName + "' AND password = '" + userPass + "' ",
+        //     function (err, results, fields) {
+        //         if (results[0] != undefined) {
+        //             currentUserId = results[0]._id;
+        //             currentUserName = results[0].name;
+        //             response.send({
+        //                 "success": true,
+        //                 "user": {
+        //                     "name": results[0].name,
+        //                     "_id":  results[0]._id
+        //                 }
+        //             })
+        //     }else{
+        //         response.send({
+        //             "success": false
+        //         })
+        //     }
+        //     });
     }
 }

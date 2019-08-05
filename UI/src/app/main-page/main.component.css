@@ -1,21 +1,69 @@
-.list__wrapper{
+.message__wrapper {
+    margin-top: 10px;
+}
+
+.input__wrapper {
+    height: 60px;
+    margin-top: 20px
+}
+
+input {
+    width: 77%
+}
+
+.name {
+    margin-top: 10px
+}
+
+.name span {
+    color: brown;
+    font-weight: bold
+}
+
+.example-viewport {
+    height: 360px;
+    width: 100%
+}
+
+.example-item {
+    height: 50px;
+}
+
+.main__wrapper {
+    border: 1px solid black
+}
+
+.header__wrapper {
     display: flex;
     align-items: center;
-    justify-content: space-between;
-    border: 1px solid gray;
-    margin-top: 2px
+    justify-content: space-between
 }
 
-.list__wrapper input{
-    width: 50%
+.input__file {
+    width: 200px
 }
 
-p{
-    margin-bottom: 0
+.input__wrapper {
+    display: flex;
+    height: 28px;
 }
 
-.update{
+.input__form input {
+    width: 100%
+}
+
+.input__form {
     display: flex;
     align-items: center;
-    justify-content: flex-start;
+    width: 100%
+}
+
+.message img {
+    width: 50px;
+    height: auto;
+}
+
+.message{
+    display: flex;
+    align-items: center
 }

@@ -1,28 +1,5 @@
 .app__wrapper{
-    border: 1px solid;
-    max-width: 600px;
-}
-
-.app__header{
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-
-.app__header{
-    position: relative;
-    background: #6ab0d9
-}
-
-.app__header p{
-    color: white;
-    font-size: 30px
-}
-
-.logout{
-    position: absolute;
-    right: 20px;
-    top: 0;
-    background: lightblue;
-    cursor: pointer
+    border: 1px solid black;
+    padding: 10px;
+    min-height: 500px
 }

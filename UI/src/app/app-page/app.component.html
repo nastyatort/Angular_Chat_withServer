@@ -1,26 +1,13 @@
 <div class="app__wrapper">
-        <div class="app__header">
-                <p>Contact list</p>
-
-                <a
-                *ngIf="showLogoutUi == true"
-                class="logout"
-                (click)="logout()"
-                routerLink="/login"
-                routerLinkActive="active"
-                >
-                logout
-        </a>
-        </div>
-
-
-        <div 
-        class="link__wrapper"
-        *ngIf="showLogoutUi == true" 
+        <a
+        *ngIf="showLogoutUi == true"
+        class="logout"
+        (click)="logout()"
+        routerLink="/login"
+        routerLinkActive="active"
         >
-                <a routerLink="/main" routerLinkActive="active">Main</a>
-                <a routerLink="/about" routerLinkActive="active">About</a>
-        </div>
-        <router-outlet></router-outlet>
-   </div>
-   <div class="load__wrapper" id="load__wrapper"></div>
+        logout
+</a>
+
+    <router-outlet></router-outlet>
+</div>

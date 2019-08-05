@@ -16,17 +16,8 @@ export class UserService{
         return this.userId.loginUserId;
       }
 
-
     getUserName(){
       this.userName = JSON.parse(localStorage.getItem("userData"));
         return this.userName.loginUserName;
-    }
-
-    getUserInfo(data: any){
-      return this.http.post('http://localhost:8008/user/get', data); 
-    }
-
-    updateUserInfo(data: any){
-      return this.http.post('http://localhost:8008/user/update', data); 
     }
 }

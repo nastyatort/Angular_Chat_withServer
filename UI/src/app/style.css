@@ -1,6 +1,5 @@
 .content__wrapper{
     min-height: 400px;
-    border: 1px solid;
     margin: 10px
 }
 
@@ -87,15 +86,70 @@ a.active{
     color: white !important;
 }
 
-.app__header{
-    margin: 0 10px
+a{
+    cursor: pointer;
 }
 
-.link__wrapper{
-    margin: 0 10px;
+.app__wrapper{
+    max-height: 528px;
 }
 
-.nav__field .link__wrapper{
-    margin: 0 0;
-    padding: 5px 10px
+.app__wrapper{
+    position: relative
+}
+
+
+.main__wrapper{
+    height: 400px;
+    overflow-y: auto;
+}
+
+.message{
+    display: flex;
+    align-self: flex-start;
+    justify-content: flex-start;
+}
+
+.message p{
+    margin-right: 5px;
+}
+
+.message p:first-child span{
+    color: green;
+    font-weight: bold;
+}
+
+.message.current p:first-child span{
+    color: brown; 
+    text-decoration: underline
+}
+
+.message.current{
+    align-items: flex-end;
+}
+
+.message p:nth-child(2){
+    color: blue;
+    font-weight: bold;
+}
+
+.message{
+    flex-direction: column;
+    align-items: flex-start;
+    background: #dae8ed;
+    border-radius: 10px;
+    margin: 10px;
+    padding: 7px
+}
+
+.message__user{
+    display: flex
+}
+
+.message p{
+    margin-bottom: 0
+}
+
+.message__text{
+    margin-bottom: 5px
 }

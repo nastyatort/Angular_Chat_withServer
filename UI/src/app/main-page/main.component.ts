@@ -1,114 +1,151 @@
 import { Component } from '@angular/core';
-import { NgModel } from '@angular/forms';
 import { HttpService } from '../services/http.service';
 import { UserService } from '../services/user.service';
-// import * as angular from 'angular'; 
-
-import { ModalComponent } from '../modal-page/modal.component';
-
-import { PhoneComponent } from '../phone-page/phone.component';
-import { identifierModuleUrl } from '@angular/compiler';
+import { SmileService } from '../services/smile.service';
+import { FileService } from '../services/file.service';
+import { MessageComponent } from '../message-page/message.component';
+import { UserComponent } from '../user-page/user.component';
+import { PassThrough } from 'stream';
+import { FormControl, FormGroup } from '@angular/forms';
+// import {SmileComponent} from '../smile-page/smile.component';
+//import { SocketService } from '../services/socket.services'
 
 @Component({
     selector: 'main-page',
     styleUrls: ['./main.component.css', '../style.css'],
     templateUrl: './main.component.html',
-    providers: [HttpService]
 })
 
 export class MainComponent {
-
+    date: any;
     constructor(
         private httpService: HttpService,
         private userService: UserService,
-    ) { }
+        private smileService: SmileService,
+        private fileService: FileService,
 
-    phone: PhoneComponent = new PhoneComponent("");
-    phones: PhoneComponent[] = [];
+        //private socketService: SocketService
+    ) {
+    }
+
+    message: MessageComponent = new MessageComponent("", "");
+    messages: MessageComponent[] = [];
+    messagesAll: MessageComponent[] = [];
+    messagesSocket: MessageComponent[] = [];
+    user: UserComponent;
+    userName: any = this.userService.getUserName();
     userId: any = this.userService.getUserId();
-    phoneId: string;
-    shouldDeletePhone: boolean = false;
+    showSmile: boolean = false;
+    text: string;
+    socket = new WebSocket("ws://localhost:3000");
+    ob: any;
+    imgPath: string;
 
-    idForModal: string;
-    idForAction: string;
+    file: File;
+    formData: FormData = new FormData();
+    inputForm: FormGroup = new FormGroup({
+        "text": new FormControl("", [
+        ]),
+        "uploadFile": new FormControl("", [
+        ])
+    })
 
-    currentValue: string;
+    public imagePath: any;
 
     ngOnInit() {
         this.httpService.getData({}).subscribe(
             (data: any) => {
-                for (let i = 0; i < data.items.length; i++) {
-                        this.phones.push(data.items[i]);
-                }
+                console.log(data);
+                this.drewMessages(data)
             });
     }
 
-    addPhone(title: NgModel) {
-        if (title.model != '') {
-            this.httpService.addData(
-                {
-                    title: this.phone.title,
-                    userId: this.userId
-                })
-                .subscribe((res: any) => {
-                    this.httpService.getData({}).subscribe(
-                        (data: any) => {
-                            this.phones = [];
-                            for (let i = 0; i < data.items.length; i++) {
-                                if (data.items[i].userId == this.userId) {
-                                    this.phones.push(data.items[i]);
-                                }
-                            }
-                        });
-                });
-        }
-        console.log( this.idForAction)
-        this.idForAction = '';
-    }
-
-    editPhone(id: string) {
-        ((document.getElementById(id) as HTMLInputElement).disabled) = false;
-        this.currentValue = (document.getElementById(id) as HTMLInputElement).value;
-        this.idForAction = id;
-    }
-
-    savePhone(id: string) {
-        let newText = ((document.getElementById(id) as HTMLInputElement).value);
-
-        this.httpService.editData({
-            title: newText,
-            _id: id,
-            userId: this.userId
-        }).subscribe(res => {
-            let editElement = this.phones.findIndex(x => x._id === id);
-            this.phones.splice(editElement, 1, { title: newText, _id: id, userId: this.userId })
-        })
-        this.idForAction = '';
-        this.idForModal = '';
-
-        ((document.getElementById(id) as HTMLInputElement).disabled) = true;
-    }
-
-    cancelPhone(id: string) {
-        ((document.getElementById(id) as HTMLInputElement).disabled) = true;
-        (document.getElementById(id) as HTMLInputElement).value = this.currentValue;
-        this.idForAction = '';
-    }
-
-    deletePhone(id: string) {
-        console.log('ui id = ' + id);
-        if (this.shouldDeletePhone == true) {
-            this.httpService.deleteData(id).subscribe(res => {})
-                let delElement = this.phones.findIndex(x => x._id == id);
-                this.phones.splice(delElement, 1);
+    drewMessages(data: any) {
+        for (let i = 0; i < data.items.length; i++) {
+            data.items = this.sortData(data.items);
+            this.messagesAll.push(data.items[i]);
+            this.messages = this.messagesAll.slice(0, 20);
+            this.messages = this.messages.reverse();
         }
     }
 
-    showModal(id: string) {
-        this.idForModal = id;
-        this.phoneId = id;
-        if ((document.getElementById(id + '__modal') as HTMLDialogElement)) {
-            (document.getElementById(id + '__modal') as HTMLDialogElement).style.visibility = "visible"
+    sortData(data: any) {
+        return data.sort((a: any, b: any) => {
+            return <any>new Date(b._creationDate) - <any>new Date(a._creationDate);
+        });
+    }
+
+    scroll() {
+        let h = document.getElementById("message__wrapper-all").offsetHeight;
+        document.getElementById("main__wrapper").scrollTo(0, h);
+    }
+
+    onShowSmile() {
+        this.showSmile = !this.showSmile;
+    }
+
+    onChangeText(smile: string) {
+        let withoutChanges = this.inputForm.controls.text.value;
+        let withChanges = withoutChanges.concat(smile)
+        this.inputForm.controls.text.setValue(withChanges);
+    }
+
+    addPhoto(event: any) {
+        console.log('this.gile before append  = ' + this.file);
+        let fileList: FileList = event.target.files;
+        this.file = fileList[0];
+        this.formData.append('uploadFile', this.file);
+        console.log('this.gile after append  = ' + this.file);
+    }
+
+    onSend() {
+        if (this.inputForm.controls.text.value != '' || this.file != undefined) {
+            if (this.file != undefined) {
+                this.imagePath = this.file.name;
+            } else {
+                this.imagePath = ''
+            }
+
+            this.socket.send(JSON.stringify({
+                text: this.inputForm.controls.text.value,
+                name: this.userName,
+                userId: this.userId,
+                _creationDate: new Date(),
+                img: this.imagePath
+            }
+            ));
+
+            this.socket.onmessage = (event) => {
+                this.ob = JSON.parse(event.data);
+                this.messages.push(this.ob);
+            };
+
+            setTimeout(() => {
+                this.scroll();
+            }, 0.1);
+
+            this.httpService.addData({
+                text: this.inputForm.controls.text.value,
+                userId: this.userId,
+                img: this.imagePath
+            }).subscribe(
+                (data: any) => {
+                    console.log(data)
+                }
+            )
+
+            this.fileService.sendData(
+                this.formData
+            ).subscribe(
+                (data: any) => {
+                },
+                error => {
+                }
+            )
+            this.inputForm.reset();
+            this.file = undefined;
+            this.inputForm.controls.text.setValue('');
+            this.formData.delete('uploadFile');
         }
     }
 }

@@ -1,7 +1,6 @@
 import { Component} from '@angular/core';
 import { HttpService} from '../services/http.service';
 import { LoginService} from '../services/login.service';
-import { UserService} from '../services/user.service';
 import { OnInit} from '@angular/core';
 import { Router, ActivatedRoute, CanActivate, ActivatedRouteSnapshot, RouterStateSnapshot } from '@angular/router';
 
@@ -30,17 +29,20 @@ export class LoginComponent implements OnInit {
 
     storageData: any;
     isLoggedData: any;
-    infoFirstName: any;
-    infoLastName: any;
-    infoEmail: any;
-    infoPhone: any;
 
     ngOnInit() {
         this.returnUrl = '/main';
     }
 
+    ngAfterViewInit(){
+        this.isLoggedData = {
+            trigger: false,
+        }
+        this.appComponent.showLogoutUi = this.isLoggedData.trigger;
+        localStorage.setItem("isLogged", JSON.stringify(this.isLoggedData));
+    }
+
     onLogin(login:NgModel, pass:NgModel){
-        this.appComponent.showLogoutUi = false;
         if(this.user.login != '' && this.user.pass != ''){
 
         this.loginService.sendData(
@@ -58,11 +60,12 @@ export class LoginComponent implements OnInit {
 
                 this.storageData = {
                     loginUserId: res.user._id,
-                    loginUserName: res.user.login,
+                    loginUserName: res.user.name
                 }
                 localStorage.setItem("userData", JSON.stringify(this.storageData));
+
             }else{
-                this.errMessage = "Не верно указано имя или пароль";
+                this.errMessage = "Не верно указан логин или пароль"
             }
         })
     }else{

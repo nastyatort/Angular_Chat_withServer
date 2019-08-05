@@ -7,18 +7,10 @@ export class HttpService{
     constructor(private http: HttpClient){ } 
 
     getData(data: any){
-      return this.http.post('http://localhost:8008/phones/get', data); 
+      return this.http.post('http://localhost:8008/message/get', data); 
     }
 
     addData(data: any){
-      return this.http.post('http://localhost:8008/phones/add', data); 
-    }
-
-    editData(data: any){
-      return this.http.post('http://localhost:8008/phones/update', data); 
-    }
-
-    deleteData(id: any){
-      return this.http.delete('http://localhost:8008/phones/delete/' + id); 
+      return this.http.post('http://localhost:8008/message/create', data); 
     }
 }

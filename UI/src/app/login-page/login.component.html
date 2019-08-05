@@ -4,6 +4,7 @@
         </div>
         <div class="content">
 
+        
             <form 
             #loginForm="ngForm"
             novalidate
@@ -35,16 +36,12 @@
             </button>
             </div>
 
-            <div class="login__err">
-                {{errMessage}}
-            </div>
-
-            <div class="logo">
-                <img src="../img/logo.png" />
-            </div>
-
             <div class="login__field">
                 <a routerLink="/registration">Registration</a>
+            </div>
+
+            <div class="login__err">
+                {{errMessage}}
             </div>
 
             </form>

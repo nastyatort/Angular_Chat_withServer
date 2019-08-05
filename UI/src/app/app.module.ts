@@ -5,21 +5,26 @@ import {CanActivate, Routes, RouterModule} from '@angular/router';
 import { HttpService} from './services/http.service';
 import { LoginService} from './services/login.service';
 import { UserService} from './services/user.service';
-import { RegistrationService} from './services/registration.service';
-import { FormsModule }   from '@angular/forms';
-import { ReactiveFormsModule } from '@angular/forms';
+import { FileService} from './services/file.service';
+import {SmileService} from './services/smile.service';
+import {RegistrationService} from './services/registration.service';
  
 import { AppComponent }   from './app-page/app.component';
 import { LoginComponent }   from './login-page/login.component';
 import { RegistrationComponent }   from './registration-page/registration.component';
 import { MainComponent }   from './main-page/main.component';
-import { PhoneComponent }   from './phone-page/phone.component';
-import { ModalComponent }   from './modal-page/modal.component';
-import {InterceptorOne} from './interceptors/interceptor';
+import { MessageComponent }   from './message-page/message.component';
+import { SmileComponent }   from './smile-page/smile.component';
+import { HistoryComponent }   from './history-page/history.component';
+
+
+import { ReactiveFormsModule } from '@angular/forms';
+import { FormsModule }   from '@angular/forms';
 
 import { HttpClientModule, HTTP_INTERCEPTORS }   from '@angular/common/http';
 
-import {LoginRouteGuard} from './guard';
+
+import { ScrollDispatchModule } from '@angular/cdk/scrolling';
 
 // определение маршрутов
 const appRoutes: Routes =[
@@ -27,8 +32,8 @@ const appRoutes: Routes =[
     { path: 'registration', component: RegistrationComponent},
     { path: '*', component: LoginComponent},
     { path: '', component: LoginComponent},
-    { path: 'about', loadChildren: './about.module#AboutModule', canActivate: [LoginRouteGuard]},        
-    { path: 'main', component: MainComponent, canActivate: [LoginRouteGuard]},
+    { path: 'main', component: MainComponent},
+    { path: 'history', component: HistoryComponent}
 ];
  
 @NgModule({
@@ -37,28 +42,30 @@ const appRoutes: Routes =[
         FormsModule, 
         RouterModule.forRoot(appRoutes), 
         HttpClientModule,
+        ScrollDispatchModule,
         ReactiveFormsModule,
     ],
     exports: [RouterModule],
     declarations: [
         AppComponent,
         LoginComponent,
+        RegistrationComponent,
         MainComponent,
-        PhoneComponent,
-        ModalComponent,
-        RegistrationComponent
+        SmileComponent,
+        HistoryComponent
     ],
     providers:    [
-        LoginRouteGuard,
         HttpService,
         LoginService,
         UserService,
+        SmileService,
+        FileService,
         RegistrationService,
-        {
-            provide: HTTP_INTERCEPTORS,
-            useClass: InterceptorOne,
-            multi: true,
-          },
+        // {
+        //     provide: HTTP_INTERCEPTORS,
+        //     useClass: InterceptorOne,
+        //     multi: true,
+        //   },
         ],
     bootstrap:    [ AppComponent ]
 })
