@@ -16,16 +16,16 @@ module.exports = {
         //взяли из базы чтоб все сравнить
 
 
-
         sequel.users.findOne({where: {name: userName, password: userPass}})
         .then(users=>{
             if(!users) return;
-            
+            currentUserId = users.id;
+            currentUserName = users.name;
             response.send({
                 "success": true,
                 "user": {
                     "name": users.name,
-                    "_id":  users._id
+                    "_id":  users.id
                 }
             })
 
@@ -35,26 +35,5 @@ module.exports = {
                 "success": false
             })
             });
-
-
-
-        // connection.query("SELECT * FROM users WHERE name = '" + userName + "' AND password = '" + userPass + "' ",
-        //     function (err, results, fields) {
-        //         if (results[0] != undefined) {
-        //             currentUserId = results[0]._id;
-        //             currentUserName = results[0].name;
-        //             response.send({
-        //                 "success": true,
-        //                 "user": {
-        //                     "name": results[0].name,
-        //                     "_id":  results[0]._id
-        //                 }
-        //             })
-        //     }else{
-        //         response.send({
-        //             "success": false
-        //         })
-        //     }
-        //     });
     }
 }

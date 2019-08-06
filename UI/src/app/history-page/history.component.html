@@ -21,7 +21,7 @@
                         [ngClass]="userId == i.userId ? 'current' : ''"
                         >{{i.userName}}</span>
                          at</p>
-                    <p>{{i._creationDate | date:"HH:mm:ss"}}:</p>
+                    <p>{{i.createdAt| date:"HH:mm:ss"}}:</p>
                 <p>{{i.text}}</p>
                 <img>
                 </div>

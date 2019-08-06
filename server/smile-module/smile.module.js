@@ -1,9 +1,12 @@
+let sequel = require('../db-module/db.module')
+
 module.exports = {
     smile: function (request, response) {
-        connection.query("SELECT * FROM smiles",
-        function (err, results, fields) {
-            console.log(results)
-            response.send({ "items": results });
-        });
+
+
+        sequel.smiles.findAll({raw:true}).then(smiles=>{
+           // console.log(smiles);
+            response.send({ "items": smiles });
+          }).catch(err=>console.log(err));
     }
 }

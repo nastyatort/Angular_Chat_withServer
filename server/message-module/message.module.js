@@ -2,18 +2,21 @@ let sequel = require('../db-module/db.module')
 
 module.exports = {
     getMessages: function (request, response) {
-        connection.query("SELECT * FROM message.messages JOIN message.users WHERE message.messages.userId = message.users._id",
-        function (err, results, fields) {
-            response.send({ "items": results });
-        });
+
+        sequel.users.findAll({
+            include: [{
+                model: sequel.messages
+            }]
+        }).then(res => {
+            response.send(res);
+            
+        })
     },
 
     createMessages: function (request, response) {
 
         let userText = request.body.text;
         let img = request.body.img;
-        let userId = request.body.img;
-        let id = 0;
         let message = {
             text: userText,
             userId: currentUserId,
@@ -26,10 +29,11 @@ module.exports = {
             userId: message.userId,
             img: message.img
 
-          }).then(res=>{
-            console.log(res);
-          }).catch(err=>console.log(err));
-
+        }).then(res => {
+            //console.log(res);
+        }).catch(err =>
+            console.log(err)
+        );
         response.send();
     }
 }
