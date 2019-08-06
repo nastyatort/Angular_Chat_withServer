@@ -1,4 +1,5 @@
-let sequel = require('../db-module/db.module')
+let sequel = require('../db-module/db.module');
+const session = require('express-session');
 
 module.exports = {
     login: function (request, response) {
@@ -16,11 +17,16 @@ module.exports = {
         //взяли из базы чтоб все сравнить
 
 
-        sequel.users.findOne({where: {name: userName, password: userPass}})
+        sequel.users.findOne({where: {name: userName}})
         .then(users=>{
+            // console.log(users);
             if(!users) return;
-            currentUserId = users.id;
-            currentUserName = users.name;
+            if(bcrypt.compareSync(userLog.password, users.password) == true){
+
+                request.session.userId = users.id;
+                request.session.name = users.name;
+                request.session.save();
+                
             response.send({
                 "success": true,
                 "user": {
@@ -28,12 +34,13 @@ module.exports = {
                     "_id":  users.id
                 }
             })
-
+        }
           }).catch(err => {
               console.log(err)
               response.send({
                 "success": false
             })
             });
+        
     }
 }

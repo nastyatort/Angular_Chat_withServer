@@ -55,7 +55,7 @@ export class MainComponent {
     ngOnInit() {
         this.httpService.getData({}).subscribe(
             (data: any) => {
-                console.log('data')
+                console.log('data');
                 console.log(data);
                 this.drewMessages(data)
             });
@@ -115,7 +115,7 @@ export class MainComponent {
                 text: this.inputForm.controls.text.value,
                 name: this.userName,
                 userId: this.userId,
-                _creationDate: new Date(),
+                createdAt: new Date(),
                 img: this.imagePath
             }
             ));

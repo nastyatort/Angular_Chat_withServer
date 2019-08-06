@@ -2,7 +2,6 @@ let sequel = require('../db-module/db.module')
 
 module.exports = {
     getMessages: function (request, response) {
-
         sequel.users.findAll({
             include: [{
                 model: sequel.messages
@@ -14,13 +13,12 @@ module.exports = {
     },
 
     createMessages: function (request, response) {
-
         let userText = request.body.text;
         let img = request.body.img;
         let message = {
             text: userText,
-            userId: currentUserId,
-            userName: currentUserName,
+            userId: request.session.userId,
+            userName: request.session.userName,
             img: img
         };
 
@@ -30,7 +28,6 @@ module.exports = {
             img: message.img
 
         }).then(res => {
-            //console.log(res);
         }).catch(err =>
             console.log(err)
         );

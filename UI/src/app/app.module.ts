@@ -26,6 +26,8 @@ import { HttpClientModule, HTTP_INTERCEPTORS }   from '@angular/common/http';
 
 import { ScrollDispatchModule } from '@angular/cdk/scrolling';
 
+import {CookieInterceptor} from './interseptors/cookie.interseptor'
+
 // определение маршрутов
 const appRoutes: Routes =[
     { path: 'login', component: LoginComponent},
@@ -61,6 +63,11 @@ const appRoutes: Routes =[
         SmileService,
         FileService,
         RegistrationService,
+        {
+            provide: HTTP_INTERCEPTORS,
+            useClass: CookieInterceptor,
+            multi: true,
+            }
         // {
         //     provide: HTTP_INTERCEPTORS,
         //     useClass: InterceptorOne,

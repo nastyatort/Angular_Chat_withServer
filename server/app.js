@@ -9,44 +9,16 @@ global.currentUserId;
 global.currentUserName;
 global.writeMessage = false;
 
-let cookieSession = require('cookie-session');
-
-app.use(cookieSession({
-  name: 'session',
-  keys: ['key1', 'key2'],
-  maxAge: 24 * 60 * 60 * 1000 
-}))
-
 //crypto
 global.bcrypt = require('bcrypt');
 global.salt = bcrypt.genSaltSync(10);
 
 
 cors = require('cors');
-app.use(cors());
+app.use(cors({credentials: true, origin: 'http://localhost:8080'}));
 app.use(bodyParser.json());
 
 app.use(express.static('uploads'));
-
-// mySQL
-
-// const mysql = require("mysql2");
-
-// global.connection = mysql.createConnection({
-//   host: "localhost",
-//   user: "root",
-//   database: "message",
-//   password: "root"
-// });
-
-// connection.connect(function (err) {
-//   if (err) {
-//     return console.error("Ошибка: " + err.message);
-//   }
-//   else {
-//     console.log("Подключение к серверу MySQL успешно установлено");
-//   }
-// });
 
 let messageModule = require('./message-module/message.module');
 let loginModule = require('./login-module/login.module');
@@ -55,6 +27,7 @@ let smileModule = require('./smile-module/smile.module');
 let fileModule = require('./file-module/file.module');
 
 // WebSocket-сервер на порту 8081
+var WebSocketServer = new require('ws');
 var WebSocketServer = new require('ws');
 var clients = {};
 
@@ -69,7 +42,7 @@ webSocketServer.on('connection', function (ws) {
     for (var key in clients) {
       //if(writeMessage == true){
       clients[key].send(message);
-     // }
+      // }
     }
   });
 
@@ -104,14 +77,18 @@ const fileFilter = (req, file, cb) => {
   }
 }
 
+//session
 
-app.get('/', function (req, res, next) {
-  // Update views
-  req.session.views = (req.session.views || 0) + 1
 
-  // Write response
-  res.end(req.session.views + ' views')
-})
+const session = require('express-session');
+
+
+app.use(session({
+  secret: 'ssshhhhh',
+  maxAge: 24 * 60 * 60 * 1000,
+  resave: false, 
+  saveUninitialized: true
+}))
 
 app.use(multer({ storage: storageConfig, ileFilter: fileFilter }).single('uploadFile'));
 

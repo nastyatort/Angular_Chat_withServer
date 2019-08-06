@@ -15,13 +15,12 @@ module.exports = {
 
         sequel.users.create({
             name: userName,
-            password: userPass,
+            password: hash,
 
         }).then(res => {
             response.send({ "success": true });
         }).catch(err =>
             response.send({ "success": false })
         );
-        connection.end();
     }
 }
