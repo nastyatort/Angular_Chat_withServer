@@ -8,11 +8,12 @@ module.exports = {
             }]
         }).then(res => {
             response.send(res);
-            
+
         })
     },
 
     createMessages: function (request, response) {
+
         let userText = request.body.text;
         let img = request.body.img;
         let message = {
@@ -27,7 +28,7 @@ module.exports = {
             userId: message.userId,
             img: message.img
 
-        }).then(res => {
+        }).then(() => {
         }).catch(err =>
             console.log(err)
         );

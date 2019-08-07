@@ -1,27 +1,15 @@
 let sequel = require('../db-module/db.module');
-const session = require('express-session');
+let bcrypt = require('bcrypt');
 
 module.exports = {
     login: function (request, response) {
-
-        // console.log('Cookies: ', request.cookies);
-        // console.log('Signed Cookies: ', request.signedCookies);
-
-        let counter = 0;
         if (!request.body) return response.sendStatus(400);
-        //берем данные из формы html
-        let userName = request.body.login;
-        let userPass = request.body.pass;
-        //создаем юзера, пытаемся логиниться
-        let userLog = { name: userName, password: userPass };
-        //взяли из базы чтоб все сравнить
 
-
-        sequel.users.findOne({where: {name: userName}})
+        sequel.users.findOne({where: {name: request.body.login}})
         .then(users=>{
             // console.log(users);
             if(!users) return;
-            if(bcrypt.compareSync(userLog.password, users.password) == true){
+            if(bcrypt.compareSync(request.body.pass, users.password) == true){
 
                 request.session.userId = users.id;
                 request.session.name = users.name;

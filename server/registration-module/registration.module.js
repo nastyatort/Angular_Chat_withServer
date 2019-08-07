@@ -1,25 +1,20 @@
 let sequel = require('../db-module/db.module')
+let bcrypt = require('bcrypt');
+let salt = bcrypt.genSaltSync(10);
 
 module.exports = {
     registration: function (request, response) {
         if (!request.body) return response.sendStatus(400);
-        //берем данные из формы html
-        let userName = request.body.login;
-        let userPass = request.body.pass;
-        let id = 0;
 
-        let hash = bcrypt.hashSync(userPass, salt);
-        //создаем юзера
-        let user = { name: userName, password: hash };
-
+        let hash = bcrypt.hashSync(request.body.pass, salt);
 
         sequel.users.create({
-            name: userName,
+            name:  request.body.login,
             password: hash,
 
-        }).then(res => {
+        }).then(() => {
             response.send({ "success": true });
-        }).catch(err =>
+        }).catch(() =>
             response.send({ "success": false })
         );
     }

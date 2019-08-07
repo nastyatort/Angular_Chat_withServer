@@ -4,15 +4,8 @@ const sequelize = new Sequelize("message", "root", "root", {
     host: "localhost"
 });
 
-sequelize.sync().then(result => {
-
-})
-    .catch(err => console.log(err));
-
 module.exports = {
-
     messages:
-
         Message = sequelize.define("messages", {
             id: {
                 type: Sequelize.INTEGER,
@@ -69,6 +62,5 @@ module.exports = {
 
 User.hasMany(Message, { foreignKey: 'userId' });
 
-sequelize.sync().then(result => {
-})
-    .catch(err => console.log(err));
+sequelize.sync().then(() => {
+}).catch(err => console.log(err));
