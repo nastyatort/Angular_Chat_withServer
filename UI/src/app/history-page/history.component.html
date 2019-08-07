@@ -12,9 +12,12 @@
                  class="message__wrapper"
                  id="message__wrapper"
                  >
+                 <div
+                 *ngFor="let i of messages"
+                 [ngClass]="userId == i.userId ? 'current message__block' : 'message__block'"
+                 >
                     <div
                     class="message"
-                    *ngFor="let i of messages"
                     >
                     <p>
                         <span
@@ -24,14 +27,14 @@
                     <p>{{i.createdAt| date:"HH:mm:ss"}}:</p>
                 <p>{{i.text}}</p>
                 <img 
-                class="chat__img"
                 *ngIf="i.img" 
+                class="chat__img"
                 src="http://localhost:8008/{{i.img}}" 
                 name="{{i.img}}"
                 >
                 </div>
                 </div>
-               
+                </div>
                 </div>
             </div>
 </div>

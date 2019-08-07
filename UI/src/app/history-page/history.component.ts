@@ -1,6 +1,7 @@
 import { Component} from '@angular/core';
 import {HttpService} from '../services/http.service';
 import {MessageComponent} from '../message-page/message.component';
+import { UserService } from '../services/user.service';
 
 @Component({
     selector: 'history-page',
@@ -11,8 +12,10 @@ import {MessageComponent} from '../message-page/message.component';
 export class HistoryComponent{
     constructor(
         private httpService: HttpService,
+        private userService: UserService,
     ){}
 
+    userId: any = this.userService.getUserId();
     message: MessageComponent = new MessageComponent("", "");
     messages: MessageComponent[] = [];
 

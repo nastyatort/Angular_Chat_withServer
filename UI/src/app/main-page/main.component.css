@@ -81,6 +81,7 @@ input {
     padding: 10px;
     z-index: 1000;
     transform: translateY(-50%) translateX(-50%);
+    width: 80vw
 }
 
 .show__img img {

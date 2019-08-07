@@ -15,9 +15,12 @@
      class="message__wrapper"
      id="message__wrapper"
      >
+     <div
+     *ngFor="let i of messages"
+     [ngClass]="userId == i.userId ? 'current message__block' : 'message__block'"
+     >
         <div
-        [ngClass]="userId == i.userId ? 'current message' : 'message'"
-        *ngFor="let i of messages"
+        class="message"
         >
         <div class="message__user">
         <p>
@@ -35,6 +38,7 @@
     name="{{i.img}}"
     (click) = "onShowModal(i.img)"
     >
+    </div>
     </div>
     </div>
     </div>
