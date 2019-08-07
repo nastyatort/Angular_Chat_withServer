@@ -16,10 +16,12 @@ import { MainComponent }   from './main-page/main.component';
 import { MessageComponent }   from './message-page/message.component';
 import { SmileComponent }   from './smile-page/smile.component';
 import { HistoryComponent }   from './history-page/history.component';
+import { SettingComponent }   from './setting-page/setting.component';
 
 
 import { ReactiveFormsModule } from '@angular/forms';
 import { FormsModule }   from '@angular/forms';
+import { ClickOutsideModule } from 'ng-click-outside';
 
 import { HttpClientModule, HTTP_INTERCEPTORS }   from '@angular/common/http';
 
@@ -35,7 +37,8 @@ const appRoutes: Routes =[
     { path: '*', component: LoginComponent},
     { path: '', component: LoginComponent},
     { path: 'main', component: MainComponent},
-    { path: 'history', component: HistoryComponent}
+    { path: 'history', component: HistoryComponent},
+    { path: 'setting', component: SettingComponent}
 ];
  
 @NgModule({
@@ -46,6 +49,7 @@ const appRoutes: Routes =[
         HttpClientModule,
         ScrollDispatchModule,
         ReactiveFormsModule,
+        ClickOutsideModule
     ],
     exports: [RouterModule],
     declarations: [
@@ -54,7 +58,8 @@ const appRoutes: Routes =[
         RegistrationComponent,
         MainComponent,
         SmileComponent,
-        HistoryComponent
+        HistoryComponent,
+        SettingComponent
     ],
     providers:    [
         HttpService,

@@ -1,6 +1,6 @@
 .main__wrapper.history{
-    height: 440px;
-    border: 1px solid green
+    border: 1px solid green;
+    height: calc(100vh - 120px);
 }
 
 a{

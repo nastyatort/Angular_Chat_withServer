@@ -11,6 +11,7 @@ export class AppComponent {
     isLogoutData: any;
     showLogout: any;
     showLogoutUi: boolean = true;
+    showMenu: boolean = false;
 
     ngOnInit(){ 
         this.showLogout =  JSON.parse(localStorage.getItem("isLogged"));
@@ -26,4 +27,17 @@ export class AppComponent {
         this.showLogout = JSON.parse(localStorage.getItem("isLogged"));
         this.showLogoutUi = (this.showLogout.trigger);
     }
+
+    onShowMenu(){
+        this.showMenu = true;
+    }
+
+    onClose(){
+        this.showMenu = false;
+    }
+
+    
+    onClickedOutside(){
+        this.showMenu = false;
+      }
 }

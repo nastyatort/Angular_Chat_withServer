@@ -1,5 +1,86 @@
 .app__wrapper{
     border: 1px solid black;
     padding: 10px;
-    min-height: 500px
+    min-height: 100vh
+}
+
+.header__wrapper{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.menu__btn{
+    background: #a3c5d9;
+    padding: 6px;
+    color: white !important;
+    cursor: pointer
+}
+
+.menu{
+    position: absolute;
+    left: -200px;
+    top: 0;
+    background: #a3c5d9;
+    color: white;
+    width: 180px;
+    transition: 0.5s;
+    height: 100vh;
+    padding: 10px
+}
+
+.menu.show{
+    left: 0;
+}
+
+.menu div a{
+    color: white
+}
+
+.close{
+    position: absolute;
+    right: 0;
+    top: 0;
+}
+
+.menu__main{
+    text-align: center
+}
+
+.menu__item{
+    display: flex;
+    align-items: center;
+}
+
+.menu__item img{
+    margin-right: 5px;
+    width: 20px;
+    height: 20px;
+    border: 1px solid
+}
+
+.menu__item a{
+    font-size: 16px;
+    margin: 4px 0;
+}
+
+
+.menu .close {
+    position: absolute;
+    right: -10px;
+    top: 0;
+    background: black;
+    color: white;
+    font-size: 10px;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    opacity: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center
+}
+
+.menu .close p{
+    margin: 0 0 3px 0
 }

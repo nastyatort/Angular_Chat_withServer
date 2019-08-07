@@ -1,0 +1,32 @@
+.setting__component{
+    display: flex;
+    align-items: center;
+    justify-content: flex-start
+}
+
+.setting__component p{
+    margin-right: 7px
+}
+
+p{
+    margin-bottom: 0
+}
+
+button{
+    background: #a3c5d9;
+    padding: 6px;
+    color: white !important;
+    outline: none;
+    border: none
+}
+
+.setting__btn{
+    display: flex;
+    justify-content: center;
+    margin-top: 10px
+}
+
+.setting{
+    border: 1px solid;
+    padding: 10px 5px
+}

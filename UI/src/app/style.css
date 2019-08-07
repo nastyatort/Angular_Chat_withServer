@@ -100,7 +100,7 @@ a{
 
 
 .main__wrapper{
-    height: 400px;
+    height: calc(100vh - 160px);
     overflow-y: auto;
 }
 
@@ -160,4 +160,12 @@ a{
 
 .message__text{
     margin-bottom: 5px
+}
+
+.back__btn{
+    display: block;
+    margin-top: 10px;
+    border: 1px solid black;
+    width: 40px;
+    margin-bottom: 20px
 }
