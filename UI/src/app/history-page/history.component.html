@@ -19,11 +19,16 @@
                     <p>
                         <span
                         [ngClass]="userId == i.userId ? 'current' : ''"
-                        >{{i.userName}}</span>
+                        >{{i.name}}</span>
                          at</p>
                     <p>{{i.createdAt| date:"HH:mm:ss"}}:</p>
                 <p>{{i.text}}</p>
-                <img>
+                <img 
+                class="chat__img"
+                *ngIf="i.img" 
+                src="http://localhost:8008/{{i.img}}" 
+                name="{{i.img}}"
+                >
                 </div>
                 </div>
                

@@ -63,7 +63,60 @@ input {
     height: auto;
 }
 
-.message{
+.message {
     display: flex;
     align-items: center
+}
+
+.show__img {
+    max-width: 400px;
+    max-height: 100%;
+    min-height: 60px;
+    min-width: 60px;
+    border: 1px solid;
+    background: white;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    padding: 10px;
+    z-index: 1000;
+    transform: translateY(-50%) translateX(-50%);
+}
+
+.show__img img {
+    width: 100%;
+}
+
+.mask {
+    position: absolute;
+    left: 0;
+    top: 0;
+    height: 520px;
+    width: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    z-index: 10;
+}
+
+.show__img .close {
+    position: absolute;
+    left: -10px;
+    top: -10px;
+    background: black;
+    color: white;
+    font-size: 10px;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    opacity: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center
+}
+
+.show__img .close p{
+    margin: 0 0 3px 0
+}
+
+.chat__img{
+    cursor: pointer;
 }

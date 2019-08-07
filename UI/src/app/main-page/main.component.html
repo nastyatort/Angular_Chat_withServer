@@ -28,7 +28,13 @@
         </div>
         <div class="message__text">
     <p>{{i.text}}</p>
-    <img *ngIf="i.img" src="http://localhost:8008/{{i.img}}">
+    <img 
+    class="chat__img"
+    *ngIf="i.img" 
+    src="http://localhost:8008/{{i.img}}" 
+    name="{{i.img}}"
+    (click) = "onShowModal(i.img)"
+    >
     </div>
     </div>
     </div>
@@ -78,4 +84,20 @@ class="input__wrapper"
     </div>
 
 </div>
+    <div 
+        *ngIf="showImg==true"
+        class="show__img">  
+        <div 
+            class="close"
+            (click)="onCloseModal()"
+            >
+                <p>x</p>
+        </div>
+         <img 
+         src="http://localhost:8008/{{modalImg}}"
+         >
+    </div>
+    <div
+        *ngIf="showImg==true"
+        class="mask"></div>
 </div>

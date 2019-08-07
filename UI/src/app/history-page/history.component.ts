@@ -13,23 +13,30 @@ export class HistoryComponent{
         private httpService: HttpService,
     ){}
 
+    message: MessageComponent = new MessageComponent("", "");
     messages: MessageComponent[] = [];
 
     ngOnInit(){    
         this.httpService.getData({}).subscribe(
             (data: any) =>{
                 console.log(data);
-                for(let i = 0; i < data.items.length; i++){
-                    data.items = this.sortData(data.items);
-                    this.messages.push(data.items[i]);
-                   }
+                for (let i = 0; i < data.length; i++) {
+                    for(let j = 0; j < data[i].messages.length; j++){
+                        this.message = data[i].messages[j];
+                        this.message['name'] = data[i].name
+                        this.messages.push(this.message);
+                        this.messages = this.sortData(this.messages);
+                        this.messages = this.messages.slice(0, 20);
+                        this.messages = this.messages.reverse();
+                    }
+                }
             });
     }
 
-    sortData(data:any) {
-        return data.sort((a:any, b:any) => {
-          return <any>new Date(b._creationDate) - <any>new Date(a._creationDate);
+    sortData(data: any) {
+        return data.sort((a: any, b: any) => {
+            return <any>new Date(b.createdAt) - <any>new Date(a.createdAt);
         });
-      }
+    }
 }
 

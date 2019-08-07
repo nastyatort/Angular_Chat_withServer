@@ -40,6 +40,8 @@ export class MainComponent {
     socket = new WebSocket("ws://localhost:3000");
     ob: any;
     imgPath: string;
+    showImg: boolean = false;
+    modalImg: string;
 
     file: File;
     formData: FormData = new FormData();
@@ -101,6 +103,15 @@ export class MainComponent {
         this.file = fileList[0];
         this.formData.append('uploadFile', this.file);
         console.log('this.gile after append  = ' + this.file);
+    }
+
+    onShowModal(img:string){
+        this.modalImg = img;
+        this.showImg = true;
+    }
+
+    onCloseModal(){
+        this.showImg = false;
     }
 
     onSend() {

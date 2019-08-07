@@ -57,10 +57,8 @@ app.use(multer({ storage: fileModule.storage, fileFilter: fileModule.filter }).s
 app.post("/login", urlencodedParser, loginModule.login);
 app.post("/registration", urlencodedParser, registrationModule.registration);
 app.post("/message/create", urlencodedParser, messageModule.createMessages);
-app.post("/message/get", urlencodedParser, messageModule.getMessages);
-app.post("/smile/get", urlencodedParser, smileModule.smile);
+app.get("/message", urlencodedParser, messageModule.getMessages);
+app.get("/smile", urlencodedParser, smileModule.smile);
 app.post("/upload", fileModule.setFile);
-
-
 
 app.listen(8008);

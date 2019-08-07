@@ -29,10 +29,10 @@ module.exports = {
             img: message.img
 
         }).then(() => {
+            response.send();
         }).catch(err =>
             console.log(err)
         );
-        response.send();
     }
 }
 
