@@ -6,19 +6,47 @@
         class="back__btn"
         >Back</a>
 
-    <div class="setting">
+    <form 
+        class="setting"
+        [formGroup]="inputForm" 
+    >
         <div class="setting__component">
             <p>Name:</p>
-            <input type="text" value="{{name}}">
+            <input 
+            type="text" 
+            formControlName="name"
+            name="name"
+            value="{{name}}">
         </div>
 
-        <div class="setting__component">
+        <div class="setting__component photo">
+            <div class="photo__component">
             <p>Photo:</p>
-            <p></p>
+
+            <img 
+            [ngClass] = "imagePath ? 'img' : 'img empty'"
+            alt=""
+            src="http://localhost:8008/{{imagePath}}" 
+            name="{{imagePath}}"
+            >
+        </div>
+
+            <input 
+            class="upload__file"
+            type="file" 
+            name="uploadFile" 
+            (change)="addPhoto($event)"
+            formControlName="uploadFile"
+            multiple
+        />
+    
+
         </div>
 
         <div class="setting__btn">
-            <button>Save</button>
+            <button
+            (click)="onSend()"
+            >Save</button>
         </div>
-    </div>
+    </form>
 </div>

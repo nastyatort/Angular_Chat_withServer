@@ -11,6 +11,7 @@ module.exports = {
         sequel.users.create({
             name:  request.body.login,
             password: hash,
+            img: ''
 
         }).then(() => {
             response.send({ "success": true });

@@ -30,3 +30,30 @@ button{
     border: 1px solid;
     padding: 10px 5px
 }
+
+.setting__component{
+    margin-bottom: 10px
+}
+
+.img{
+    width: 200px;
+    height: auto
+}
+
+.img.empty{
+    width: 0
+}
+
+.photo__component{
+    display: flex
+}
+
+.setting__component.photo{  
+    flex-direction: column;
+    align-items: flex-start
+}
+
+.upload__file{
+    margin-top: 10px;
+    margin-left: 48px
+}

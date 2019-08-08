@@ -7,6 +7,7 @@ import { LoginService} from './services/login.service';
 import { UserService} from './services/user.service';
 import { FileService} from './services/file.service';
 import {SmileService} from './services/smile.service';
+import {SettingService} from './services/setting.service';
 import {RegistrationService} from './services/registration.service';
  
 import { AppComponent }   from './app-page/app.component';
@@ -68,6 +69,7 @@ const appRoutes: Routes =[
         SmileService,
         FileService,
         RegistrationService,
+        SettingService,
         {
             provide: HTTP_INTERCEPTORS,
             useClass: CookieInterceptor,

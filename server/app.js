@@ -15,6 +15,7 @@ let loginModule = require('./login-module/login.module');
 let registrationModule = require('./registration-module/registration.module');
 let smileModule = require('./smile-module/smile.module');
 let fileModule = require('./file-module/file.module');
+let settingModule = require('./setting-module/setting.module');
 
 
 //ws
@@ -60,5 +61,7 @@ app.post("/message/create", urlencodedParser, messageModule.createMessages);
 app.get("/message", urlencodedParser, messageModule.getMessages);
 app.get("/smile", urlencodedParser, smileModule.smile);
 app.post("/upload", fileModule.setFile);
+app.get("/setting", settingModule.getUsers);
+app.post("/setting/update", settingModule.updateUsers);
 
 app.listen(8008);
