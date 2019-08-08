@@ -24,6 +24,7 @@
             <p>Photo:</p>
 
             <img 
+            *ngIf=imagePath
             [ngClass] = "imagePath ? 'img' : 'img empty'"
             alt=""
             src="http://localhost:8008/{{imagePath}}" 

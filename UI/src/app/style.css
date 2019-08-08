@@ -92,10 +92,7 @@ a{
 
 .app__wrapper{
     max-height: 528px;
-}
-
-.app__wrapper{
-    position: relative
+    min-height: calc(100vh - 2px)
 }
 
 

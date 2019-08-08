@@ -8,7 +8,7 @@ module.exports = {
         sequel.users.findOne({where: {name: request.body.login}})
         .then(users=>{
             // console.log(users);
-            if(!users) return;
+            //if(!users) return;
             if(bcrypt.compareSync(request.body.pass, users.password) == true){
 
                 request.session.userId = users.id;
@@ -21,6 +21,10 @@ module.exports = {
                     "name": users.name,
                     "_id":  users.id
                 }
+            })
+        }else{
+            response.send({
+                "success": false
             })
         }
           }).catch(err => {
