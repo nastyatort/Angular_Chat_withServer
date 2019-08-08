@@ -121,3 +121,14 @@ input {
 .chat__img{
     cursor: pointer;
 }
+
+.message img.chat__photo{
+    width: 25px;
+    height: 25px;
+    border-radius: 50%;
+    margin-right: 5px
+}
+
+.message__user{
+    margin-bottom: 5px
+}

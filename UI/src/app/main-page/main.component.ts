@@ -67,13 +67,16 @@ export class MainComponent {
         for (let i = 0; i < data.length; i++) {
             for(let j = 0; j < data[i].messages.length; j++){
                 this.message = data[i].messages[j];
-                this.message['name'] = data[i].name
+                this.message['name'] = data[i].name;
+                this.message['photo'] = data[i].img;
                 this.messages.push(this.message);
                 this.messages = this.sortData(this.messages);
                 this.messages = this.messages.slice(0, 20);
                 this.messages = this.messages.reverse();
             }
         }
+    
+
     }
 
     sortData(data: any) {
