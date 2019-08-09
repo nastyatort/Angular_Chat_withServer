@@ -143,16 +143,6 @@ export class MainComponent {
                 this.scroll();
             }, 0.1);
 
-            this.httpService.addData({
-                text: this.inputForm.controls.text.value,
-                userId: this.userId,
-                img: this.imagePath
-            }).subscribe(
-                (data: any) => {
-                    console.log(data)
-                }
-            )
-
             this.fileService.sendData(
                 this.formData
             ).subscribe(
