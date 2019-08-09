@@ -11,6 +11,6 @@ export class HttpService{
     }
 
     addData(data: any){
-      return this.http.post('http://localhost:8008/message/create', data); 
+      return this.http.post('http://localhost:8008/message', data); 
     }
 }

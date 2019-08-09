@@ -5,6 +5,8 @@ module.exports = {
     login: function (request, response) {
         if (!request.body) return response.sendStatus(400);
 
+console.log(request.body)
+
         sequel.users.findOne({where: {name: request.body.login}})
         .then(users=>{
             // console.log(users);

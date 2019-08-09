@@ -11,6 +11,6 @@ export class SettingService{
     }
 
     updateData(data: any){
-        return this.http.post('http://localhost:8008/setting/update', data); 
+        return this.http.put('http://localhost:8008/setting', data); 
       }
 }

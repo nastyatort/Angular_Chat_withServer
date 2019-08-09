@@ -57,11 +57,11 @@ app.use(multer({ storage: fileModule.storage, fileFilter: fileModule.filter }).s
 
 app.post("/login", urlencodedParser, loginModule.login);
 app.post("/registration", urlencodedParser, registrationModule.registration);
-app.post("/message/create", urlencodedParser, messageModule.createMessages);
+app.post("/message", urlencodedParser, messageModule.createMessages);
 app.get("/message", urlencodedParser, messageModule.getMessages);
 app.get("/smile", urlencodedParser, smileModule.smile);
 app.post("/upload", fileModule.setFile);
 app.get("/setting", settingModule.getUsers);
-app.post("/setting/update", settingModule.updateUsers);
+app.put("/setting", settingModule.updateUsers);
 
 app.listen(8008);

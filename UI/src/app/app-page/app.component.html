@@ -11,6 +11,7 @@
         >menu</p>
 
         <div 
+        *ngIf="showLogoutUi == true"
         [ngClass] = "showMenu == true ? 'menu show' : 'menu'"
         >
         <div 
@@ -41,6 +42,14 @@
 
         </div>
 </div>
+
+<div class="img__wrapper">
+<img
+    class="logo"
+    src="../img/logo.png"
+>
+</div>
+
         <a
         *ngIf="showLogoutUi == true"
         class="logout"
