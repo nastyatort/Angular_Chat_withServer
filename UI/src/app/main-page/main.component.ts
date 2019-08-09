@@ -57,8 +57,6 @@ export class MainComponent {
     ngOnInit() {
         this.httpService.getData({}).subscribe(
             (data: any) => {
-                console.log('data');
-                console.log(data);
                 this.drewMessages(data)
             });
     }
