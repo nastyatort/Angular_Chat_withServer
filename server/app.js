@@ -32,11 +32,11 @@ app.use(multer({ storage: fileModule.storage, fileFilter: fileModule.filter }).s
 
 app.post("/login", loginModule.login);
 app.post("/registration", registrationModule.registration);
-//app.post("/message", messageModule.createMessages);
 app.get("/message", messageModule.getMessages);
 app.get("/smile", smileModule.smile);
 app.post("/upload", fileModule.setFile);
 app.get("/setting", settingModule.getUsers);
 app.put("/setting", settingModule.updateUsers);
+
 
 app.listen(8008);

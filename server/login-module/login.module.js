@@ -2,6 +2,7 @@ let sequel = require('../db-module/db.module');
 let bcrypt = require('bcrypt');
 
 module.exports = {
+    
     login: function (request, response) {
         if (!request.body) return response.sendStatus(400);
 
